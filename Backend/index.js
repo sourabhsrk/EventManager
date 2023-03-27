@@ -12,6 +12,8 @@ app.get('/', (req, res) => {
 
 app.use(cors())
 app.use(express.json());
+
+
 //available routes
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/events', require('./routes/events'))

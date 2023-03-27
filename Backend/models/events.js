@@ -23,13 +23,18 @@ const EventSchema = new Schema({
     type: String,
     default: 'cultural'
   },
-  will_date:{
+  dateTime:{
     type: Date,
     default: Date.now
   },
   venue:{
     type: String,
     require: true
+  },
+  image:{
+    data: Buffer, 
+    contentType: String 
   }
 });
+
 module.exports  = mongoose.model('events', EventSchema);

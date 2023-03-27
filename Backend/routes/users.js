@@ -10,6 +10,7 @@ const users = require("../models/users");
 router.post('/register/:eid',fetchuser,
     async (req,res)=>{
     try{
+      let success = false;
       const updatedUserEventList = await users.findOneAndUpdate(
         { _id: req.user.id }, 
         { $addToSet: { 
@@ -17,11 +18,12 @@ router.post('/register/:eid',fetchuser,
             } 
         },
         {new:true})
-        res.json(updatedUserEventList);
+        success=true;
+        res.json({success,updatedUserEventList});
 
     } catch (error){
         console.error(error.message);
-        res.status(500).send("Internal Server error");
+        res.status(500).send({"msg":"Internal Server error",success});
     }
 })
 
@@ -30,6 +32,7 @@ router.post('/register/:eid',fetchuser,
 router.put('/unregister/:eid',fetchuser,
     async (req,res)=>{
     try{
+        let success= false;
        const updatedUserEventList = await users.findOneAndUpdate(
         { _id: req.user.id },
         {
@@ -38,11 +41,12 @@ router.put('/unregister/:eid',fetchuser,
             }
         },
         {new:true})
-        res.json(updatedUserEventList);
+        success=true;
+        res.json({success,updatedUserEventList});
 
     } catch (error){
         console.error(error.message);
-        res.status(500).send("Internal Server error");
+        res.status(500).send({"msg":"Internal Server error",success});
     }
 })
 
@@ -53,8 +57,8 @@ router.get('/getevents',fetchuser,
         let allEvents = [];
         const curruser = await users.findById(req.user.id);
         for(const id of curruser.revents){
-            const event = await events.find({eid:id});
-            allEvents.push(event[0]);    
+            const event = await events.findOne({eid:id});
+            allEvents.push(event);    
         }
         // you can write this function in this way also - dont use foreach loop in this case
         // we need to await for all the promises to resolve
@@ -64,7 +68,7 @@ router.get('/getevents',fetchuser,
         //         allEvents.push(event[0]);    
         //     })
         //  )
-        res.send(allEvents);
+        res.json(allEvents);
     } catch (error){
         console.error(error.message);
         res.status(500).send("Internal Server error");

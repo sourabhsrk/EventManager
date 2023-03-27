@@ -19,10 +19,6 @@ const UserSchema = new Schema({
     type: String,
     require: true
   },
-  class: {
-    type: String,
-    require: true
-  },
   revents: {
     type: [Number]
   }

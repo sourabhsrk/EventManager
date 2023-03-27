@@ -42,7 +42,7 @@ router.post(
                 email: req.body.email,
                 password: secPass
             });
-            const JWT_SECRET = process.env.JWT_SECRET;
+            const JWT_SECRET = `${process.env.JWT_SECRET}`;
             const data = {
                 user: {
                 id: currUser.id
@@ -82,7 +82,7 @@ router.post(
            if(!pswComp){
             return res.status(400).json({success,error: "please enter correct credentials"});
            }
-           const JWT_SECRET = process.env.JWT_SECRET;
+           const JWT_SECRET = `${process.env.JWT_SECRET}`;
             const data = {
                 user: {
                 id: chkuser.id
