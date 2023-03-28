@@ -63,9 +63,23 @@ const UserState = (props) => {
         setUserEvents(json);
     }
 
-    
+    //Check if user is registered or not
+    const checkRegister = async(eid) => {
+        const response = await fetch(`${host}/api/users/chkregister/${eid}`,{
+            method : 'GET',
+            mode : 'cors',
+            headers : {
+                "Content-Type" : "application/json",
+                "auth-token"   :  localStorage.getItem('token') 
+            }
+        });
+        const json = await response.json();
+        //setIsUserRegistered(json);
+        return json;
+    }
+
     return(
-        <UserContext.Provider value={{userEvents,register,unregister,fetchUserEvents}}>
+        <UserContext.Provider value={{userEvents,register,unregister,fetchUserEvents,checkRegister}}>
             {props.children}
         </UserContext.Provider>
     )

@@ -1,12 +1,12 @@
-import React, {useContext,useState} from 'react'
+import React, {useContext,useState,useEffect} from 'react'
 import UserContext from '../context/user/UserContext'
 import defaultimage from '../event.jpg'
 
 const  MyRegEventItem = (props) => {
-    const [isRegistered,setIsRegistered] = useState(false);
     const context = useContext(UserContext); 
-    const {register,unregister} = context;
+    const {register,unregister,checkRegister} = context;
     const {event} = props;
+    const [isRegistered,setIsRegistered] = useState(false);
 
     let image="";
     if(event.image){
@@ -34,6 +34,15 @@ const  MyRegEventItem = (props) => {
         handleRegister(eid);
       }
     }
+
+    useEffect(()=>{
+      checkRegister(event.eid)
+      .then(response=>setIsRegistered(response))
+      .catch(err=>console.log(err));
+     
+      // eslint-disable-next-line
+    },[])
+
   return (
     <div className="col-md-3">
       <div className="card my-3">

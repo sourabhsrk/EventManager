@@ -75,6 +75,21 @@ router.get('/getevents',fetchuser,
     }
 })
 
-
+// Route 4: Check user is registered for an event or not
+router.get('/chkregister/:eid',fetchuser,
+    async (req,res)=>{
+    try{
+        let isRegistered = false;
+        const curruser = await users.findById(req.user.id);
+        if(curruser.revents.includes(req.params.eid)){
+            isRegistered = true;
+        }
+       
+        res.json(isRegistered);
+    } catch (error){
+        console.error(error.message);
+        res.status(500).send("Internal Server error");
+    }
+})
 
 module.exports = router
