@@ -88,7 +88,7 @@ const EventState = (props) => {
     }
 
     // edit event function
-    const updateEvent = async(id,title,tag,venue,dateTime,description) => {   
+    const updateEvent = async(id,title,description,venue,dateTime,tag) => {   
     
     //API CALL
     const response = await fetch(`${host}/api/events/updateEvent/${id}`,{

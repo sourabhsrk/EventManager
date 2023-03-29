@@ -70,12 +70,15 @@ router.post('/addevent',[upload.single('image'),fetchuser],
     }   
     try{
         const {eid,title,tag,venue,dateTime,description} = req.body;
-        const image = {
-            data: req.file.buffer,
-            contentType: req.file.mimetype
-        };
+        let image = null;
+        if(req.file){
+            image = {
+                data: req.file.buffer,
+                contentType: req.file.mimetype
+            };
+        }
         const addedevent = new events({
-            eid,title,tag,venue,dateTime,description,image,user:req.user.id
+            eid,title,tag:tag.toLowerCase(),venue,dateTime,description,image,user:req.user.id
         })
         const savedevent = await addedevent.save();
         res.json(savedevent);
@@ -90,14 +93,14 @@ router.post('/addevent',[upload.single('image'),fetchuser],
 router.put('/updateEvent/:eid',fetchuser,
     async (req,res)=>{
     try{
-       const {title,tag,venue,dateTime,description} = req.body;
+       const {title,description,venue,dateTime,tag} = req.body;
         // create a new objet for newevent
         const newevent = {};
         if(title){newevent.title = title};
         if(venue){newevent.venue = venue};
         if(dateTime){newevent.dateTime = dateTime};
         if(description){newevent.description = description};
-        if(tag){newevent.tag = tag};
+        if(tag){newevent.tag = tag.toLowerCase()};
 
         // find the event by id, match with given user id and update it
         const event = await events.findOne({eid: req.params.eid});

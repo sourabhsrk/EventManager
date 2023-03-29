@@ -17,7 +17,7 @@ router.post(
         body("email","Enter a valid email")
         .isEmail()
         .custom(email => {
-            return user.findUserByEmail(email).then(user => {
+            return user.findOne({email}).then(user => {
               if (user) {
                 return Promise.reject('E-mail already in use');
               }

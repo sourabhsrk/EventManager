@@ -28,7 +28,7 @@ const Signup = () => {
                 navigate("/login");
             }
             else{
-                showAlert("Please use correct credentials", "warning");
+                showAlert("Due to Internal error we are unable to create your account", "warning");
             }
         }
         else{

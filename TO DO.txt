@@ -1,0 +1,11 @@
+Event App issues and modifications
+
+2 - Mobile number property should be added
+3 - error handling with alerts are not properly done
+4 - Event review or feedback box need to be added for user     //// need to think of Greyed out event card
+5 - Date filter for todays and upcoming events
+6 - Number of users registered for event - need to show this detail in card.
+7 - I can sort events based on the popularity = number of users register for a event.
+8 - On Demand Volunteer needed option in card.
+9 - Future component work - Placement events and status
+
