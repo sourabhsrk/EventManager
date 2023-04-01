@@ -7,20 +7,20 @@ This application contains all your college events, you can register for event an
 This project is special for me. This is my College Major Project. I got the idea from the scenario where students going class to class to inform students about the event and take their name. I want to digitalize this method.
 
 ## Learnings
--React JS
--Node JS - Express
--MongoDB
--Bootstrap v5.3
--Router concept
--Backend concept
--How to store images in mongodb?
--How to create API / end points?
--Thunder Client
--Encrypted Authentication token concept
--Middleware functions
--How to connect backend functionality with frontend.
--Context API concept - Most Important
--Redux Store - very very IMP
+- React JS
+- Node JS - Express
+- MongoDB
+- Bootstrap v5.3
+- Router concept
+- Backend concept
+- How to store images in mongodb?
+- How to create API / end points?
+- Thunder Client
+- Encrypted Authentication token concept
+- Middleware functions
+- How to connect backend functionality with frontend.
+- Context API concept - Most Important
+- Redux Store - very very IMP
 
 ## Future modification Ideas
 - error handling with alerts are not properly done  
