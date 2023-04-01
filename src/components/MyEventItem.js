@@ -1,10 +1,13 @@
 import React, {useContext} from 'react'
 import EventContext from '../context/events/EventContext'
 import defaultimage from '../event.jpg'
+import { useDispatch } from 'react-redux'
+import  {setProgress} from '../State/action-creators/index'
 
 
 const MyEventItem = (props) => {
     const context = useContext(EventContext); 
+    const dispatch = useDispatch();
     const {deleteEvent} = context;
     const {event,editEvent} = props;
     let image="";
@@ -15,9 +18,15 @@ const MyEventItem = (props) => {
     else{
         image = defaultimage;
     }
+    setTimeout(()=>{
+      dispatch(setProgress(100));
+    },500)
   return (
     <div className="col-md-3">
       <div className="card my-3">
+        <div style={{display:'flex',justifyContent: 'flex-end',position:'absolute',right: '0'}}>
+          <span className=" badge rounded-pill bg-danger">Participants:{event.participants}</span>
+        </div>
         <img src={image} className="card-img-top" alt="Banner"/>
         <div className="card-body">
             <h5 className="card-title">{event.title} - {event.eid}</h5>

@@ -4,10 +4,13 @@ import AlertContext from '../context/alert/AlertContext'
 import MyEventItem from './MyEventItem'
 import { Link,useNavigate } from 'react-router-dom'
 import moment from 'moment'
+import { useDispatch } from 'react-redux'
+import  {setProgress} from '../State/action-creators/index'
 
 const MyEvent = () => {
   const ref = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const context = useContext(EventContext); 
   const {events,fetchMyEvents,getUser,updateEvent} = context;
   const alertcontext = useContext(AlertContext); 
@@ -32,6 +35,7 @@ const MyEvent = () => {
     if(localStorage.getItem('token')){
         fetchMyEvents();
         getUser();
+        dispatch(setProgress(20));
     }
     else{
         navigate('/login');

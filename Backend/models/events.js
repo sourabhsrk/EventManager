@@ -31,9 +31,9 @@ const EventSchema = new Schema({
     type: String,
     require: true
   },
-  mobile:{
-    type: String,
-    require: true
+  participants:{
+    type: Number,
+    default: 0
   },
   image:{
     data: Buffer, 

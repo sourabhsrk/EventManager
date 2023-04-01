@@ -12,13 +12,21 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Alert from "./components/Alert";
 import AlertState from "./context/alert/AlertState";
+import LoadingBar from 'react-top-loading-bar';
+import { useSelector} from "react-redux";
 
 function App() {
+  const progress = useSelector(state=>state.progress);
+  
   return (
     <AlertState>
       <EventState>
         <UserState>
           <Router>
+            <LoadingBar
+              color='#f11946'
+              progress={progress}
+            />
             <Navbar/>
             <Alert/>
             <div className="container">

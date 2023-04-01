@@ -46,6 +46,9 @@ const EventItem = (props) => {
   return (
     <div className="col-md-3">
       <div className="card my-3">
+        <div style={{display:'flex',justifyContent: 'flex-end',position:'absolute',right: '0'}}>
+          <span className=" badge rounded-pill bg-danger">Participants:{event.participants}</span>
+        </div>
         <img src={image} className="card-img-top" alt="Banner"/>
         <div className="card-body">
             <h5 className="card-title">{event.title}</h5>

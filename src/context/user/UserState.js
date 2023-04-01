@@ -27,6 +27,15 @@ const UserState = (props) => {
         else{
             showAlert("Due to internal server error, you are not registered for event.Please try after sometime","danger")
         }
+        const response2 = await fetch(`${host}/api/events/updateEventCount/${eid}/${1}`,{
+            method : 'PUT',
+            mode : 'cors',
+            headers : {
+                "Content-Type" : "application/json"
+            }
+        })
+        const json2 = await response2.json();
+        console.log(json2);
     }
 
 
@@ -47,6 +56,15 @@ const UserState = (props) => {
         else{
             showAlert("Due to internal server error, you have not unregistered for event.Please try after sometime","danger")
         }
+        const response2 = await fetch(`${host}/api/events/updateEventCount/${eid}/${-1}`,{
+            method : 'PUT',
+            mode : 'cors',
+            headers : {
+                "Content-Type" : "application/json"
+            }
+        })
+        const json2 = await response2.json();
+        console.log(json2);
     }
 
     //fetch all register event for user

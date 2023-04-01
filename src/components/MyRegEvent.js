@@ -2,19 +2,23 @@ import React, {useContext,useEffect} from 'react'
 import UserContext from '../context/user/UserContext'
 import MyRegEventItem from './MyRegEventItem'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import  {setProgress} from '../State/action-creators/index'
 
 const MyRegEvent = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const context = useContext(UserContext); 
   const {userEvents,fetchUserEvents} = context;
   
 
   useEffect(()=>{
     if(localStorage.getItem('token')){
-    fetchUserEvents();
+      fetchUserEvents();
+      dispatch(setProgress(20));
     }
     else{
-        navigate('/login');
+      navigate('/login');
     }
     // eslint-disable-next-line
   },[])

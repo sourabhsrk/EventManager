@@ -1,51 +1,59 @@
 import React, {useContext,useState,useEffect} from 'react'
 import UserContext from '../context/user/UserContext'
 import defaultimage from '../event.jpg'
+import { useDispatch } from 'react-redux'
+import  {setProgress} from '../State/action-creators/index'
 
 const  MyRegEventItem = (props) => {
-    const context = useContext(UserContext); 
-    const {register,unregister,checkRegister} = context;
-    const {event} = props;
-    const [isRegistered,setIsRegistered] = useState(false);
+  const dispatch = useDispatch();
+  const context = useContext(UserContext); 
+  const {register,unregister,checkRegister} = context;
+  const {event} = props;
+  const [isRegistered,setIsRegistered] = useState(false);
 
-    let image="";
-    if(event.image){
-        const blob = new Blob([Int8Array.from(event.image.data.data)], {type: event.image.contentType });
-        image = window.URL.createObjectURL(blob);
+  let image="";
+  if(event.image){
+      const blob = new Blob([Int8Array.from(event.image.data.data)], {type: event.image.contentType });
+      image = window.URL.createObjectURL(blob);
+  }
+  else{
+      image = defaultimage;
+  }
+
+  const handleRegister = (eid) =>{
+    register(eid);
+    setIsRegistered(true);
+  }
+  const handleUnRegister = (eid) =>{
+    unregister(eid);
+    setIsRegistered(false);
+  }
+
+  const handleClick = (eid) => {
+    if(isRegistered){
+      handleUnRegister(eid);
     }
     else{
-        image = defaultimage;
+      handleRegister(eid);
     }
+  }
 
-    const handleRegister = (eid) =>{
-      register(eid);
-      setIsRegistered(true);
-    }
-    const handleUnRegister = (eid) =>{
-      unregister(eid);
-      setIsRegistered(false);
-    }
-
-    const handleClick = (eid) => {
-      if(isRegistered){
-        handleUnRegister(eid);
-      }
-      else{
-        handleRegister(eid);
-      }
-    }
-
-    useEffect(()=>{
-      checkRegister(event.eid)
-      .then(response=>setIsRegistered(response))
-      .catch(err=>console.log(err));
-     
-      // eslint-disable-next-line
-    },[])
+  useEffect(()=>{
+    checkRegister(event.eid)
+    .then(response=>setIsRegistered(response))
+    .catch(err=>console.log(err));
+    setTimeout(()=>{
+      dispatch(setProgress(100));
+    },500)
+    // eslint-disable-next-line
+  },[])
 
   return (
     <div className="col-md-3">
       <div className="card my-3">
+        <div style={{display:'flex',justifyContent: 'flex-end',position:'absolute',right: '0'}}>
+          <span className=" badge rounded-pill bg-danger">Participants:{event.participants}</span>
+        </div>
         <img src={image} className="card-img-top" alt="Banner"/>
         <div className="card-body">
             <h5 className="card-title">{event.title}</h5>

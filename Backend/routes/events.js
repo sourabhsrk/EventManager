@@ -142,4 +142,25 @@ router.delete('/deleteEvent/:eid',fetchuser,
     }
 })
 
+// Route 5 : Updating participant whenever a user register in event
+router.put('/updateEventCount/:eid/:count',
+    async (req,res)=>{
+
+    const event = await events.findOne({eid:req.params.eid})
+    if(event.participants==0&&req.params.count<0){
+        return res.status(400).send("Invalid input");
+    }
+    
+    events.findOneAndUpdate({eid:req.params.eid},{$inc: {participants: req.params.count} },{new:true})
+    .then(response=>{
+        res.json(response.participants);  
+    })
+    .catch(error=>{
+        console.log(error);
+        res.status(500).send("Internal Server error");
+    });
+
+       
+})
+
 module.exports = router

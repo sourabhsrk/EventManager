@@ -2,19 +2,26 @@ import React, {useContext,useEffect} from 'react'
 import EventContext from '../context/events/EventContext'
 import EventItem from './EventItem'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import  {setProgress} from '../State/action-creators/index'
 
 const AllEvents = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const context = useContext(EventContext); 
   const {allevents,fetchAllEvents,getUser} = context;
  
+
   useEffect(()=>{
     if(localStorage.getItem('token')){
-    fetchAllEvents();
-    getUser();
+      fetchAllEvents();
+      getUser();
+      setTimeout(()=>{
+        dispatch(setProgress(100));
+      },500)
     }
     else{
-        navigate('/login');
+      navigate('/login');
     }
     // eslint-disable-next-line
   },[])

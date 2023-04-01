@@ -6,12 +6,12 @@ export default function About() {
     <div className="accordion-item">
       <h2 className="accordion-header" id="headingOne">
         <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          iNotebook
+          Event Manager
         </button>
       </h2>
       <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
         <div className="accordion-body">
-          <strong>A note application with specific user note facility.</strong> This application can store notes for specific user. You can create, update and delete your notes. Note application is highly used application in todays world, you can store any personal information like passwords, account number, shedule etc.
+          <strong>A event application for college purpose.</strong> This application can show all the ongoing events in college. You can register for a event, and eventCreators can perform CRUD operations on their events.
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@ export default function About() {
       </h2>
       <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
         <div className="accordion-body">
-          <strong>Completely Safe.</strong> Your data is safe, we have built login and signup feature for this app, each user will get authentication token after logging in. No other user can fetch your notes without correct authentication token.
+          <strong>Completely Safe.</strong> Your information will be shared with authentic eventCreators which are from your college only.
         </div>
       </div>
     </div>
